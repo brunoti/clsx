@@ -28,6 +28,20 @@ test('strings (variadic)', () => {
 	assert.is(fn(false && 'foo', 'bar', 'baz', ''), 'bar baz');
 });
 
+test('string instances', () => {
+	assert.is(fn(new String('')), '');
+	assert.is(fn(new String('foo')), 'foo');
+	assert.is(fn(true && new String('foo')), 'foo');
+	assert.is(fn(false && new String('foo')), '');
+});
+
+test('string instances (variadic)', () => {
+	assert.is(fn(new String('')), '');
+	assert.is(fn(new String('foo'), new String('bar')), 'foo bar');
+	assert.is(fn(true && new String('foo'), false && new String('bar'), new String('baz')), 'foo baz');
+	assert.is(fn(false && new String('foo'), new String('bar'), new String('baz'), ''), 'bar baz');
+});
+
 test('emptys', () => {
 	assert.is(fn(''), '');
 	assert.is(fn(undefined), '');

@@ -28,6 +28,20 @@ test('strings (variadic)', () => {
 	assert.is(fn(false && 'foo', 'bar', 'baz', ''), 'bar baz');
 });
 
+test('string instances', () => {
+	assert.is(fn(new String('')), '');
+	assert.is(fn(new String('foo')), 'foo');
+	assert.is(fn(true && new String('foo')), 'foo');
+	assert.is(fn(false && new String('foo')), '');
+});
+
+test('string instances (variadic)', () => {
+	assert.is(fn(new String('')), '');
+	assert.is(fn(new String('foo'), new String('bar')), 'foo bar');
+	assert.is(fn(true && new String('foo'), false && new String('bar'), new String('baz')), 'foo baz');
+	assert.is(fn(false && new String('foo'), new String('bar'), new String('baz'), ''), 'bar baz');
+});
+
 test('numbers', () => {
 	assert.is(fn(1), '1');
 	assert.is(fn(12), '12');
@@ -41,6 +55,21 @@ test('numbers', () => {
 test('numbers (variadic)', () => {
 	assert.is(fn(0, 1), '1');
 	assert.is(fn(1, 2), '1 2');
+});
+
+test('number instances', () => {
+	assert.is(fn(new Number(1)), '1');
+	assert.is(fn(new Number(12)), '12');
+	assert.is(fn(new Number(0.1)), '0.1');
+	assert.is(fn(new Number(0)), '');
+
+	assert.is(fn(new Number(Infinity)), 'Infinity');
+	assert.is(fn(new Number(NaN)), '');
+});
+
+test('number instances (variadic)', () => {
+	assert.is(fn(new Number(0), new Number(1)), '1');
+	assert.is(fn(new Number(1), new Number(2)), '1 2');
 });
 
 test('objects', () => {
