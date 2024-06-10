@@ -2,7 +2,7 @@ export function clsx() {
 	var i=0, tmp, str='', len=arguments.length;
 	for (; i < len; i++) {
 		if (tmp = arguments[i]) {
-			if (typeof tmp === 'string') {
+			if (Object.prototype.toString.call(tmp) === '[object String]') {
 				str += (str && ' ') + tmp;
 			}
 		}

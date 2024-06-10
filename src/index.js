@@ -1,9 +1,11 @@
+const is = (x, t) => Object.prototype.toString.call(x) === `[object ${t}]`;
+
 function toVal(mix) {
 	var k, y, str='';
 
-	if (typeof mix === 'string' || typeof mix === 'number') {
+	if (is(mix, 'String') || is(mix, 'Number')) {
 		str += mix;
-	} else if (typeof mix === 'object') {
+	} else if (is(mix, 'Object')) {
 		if (Array.isArray(mix)) {
 			var len=mix.length;
 			for (k=0; k < len; k++) {
